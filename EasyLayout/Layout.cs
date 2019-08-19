@@ -93,7 +93,7 @@ namespace EasyLayout
 
         static NSLayoutConstraint CompileConstraint (BinaryExpression expr, UIView constrainedView)
         {
-            var rel = NSLayoutRelation.Equal;
+            NSLayoutRelation rel;
             switch (expr.NodeType) {
                 case ExpressionType.Equal:
                     rel = NSLayoutRelation.Equal;
@@ -126,12 +126,13 @@ namespace EasyLayout
                 right.Item3, right.Item4);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage ("Common Practices and Code Improvements", "RECS0093:Convert 'if' to '&&' expression", Justification = "Crazy unreadable")]
         static (NSObject View, NSLayoutAttribute Attribute, nfloat, nfloat) GetRight (Expression expr)
         {
             var r = expr;
 
             NSObject view = null;
-            NSLayoutAttribute attr = NSLayoutAttribute.NoAttribute;
+            var attr = NSLayoutAttribute.NoAttribute;
             nfloat mul = 1;
             nfloat add = 0;
             var pos = true;
@@ -177,8 +178,8 @@ namespace EasyLayout
             }
             else if (r.NodeType == ExpressionType.MemberAccess || r.NodeType == ExpressionType.Call || r.NodeType == ExpressionType.Convert) {
                 var t = GetViewAndAttribute (r);
-                view = t.Item1;
-                attr = t.Item2;
+                view = t.View;
+                attr = t.Attribute;
             }
             else {
                 throw new NotSupportedException ("Unsupported layout expression node type " + r.NodeType);
@@ -282,8 +283,7 @@ namespace EasyLayout
 
             var viewExpr = frameExpr.Expression;
 
-            var view = Eval (viewExpr) as UIView;
-            if (view == null)
+            if (!(Eval (viewExpr) is UIView view))
                 throw new NotSupportedException ("Constraints only apply to views.");
 
             if (frameExpr.Member.Name == "SafeAreaLayoutGuide") {
@@ -326,8 +326,7 @@ namespace EasyLayout
 
         static void FindConstraints (Expression expr, List<BinaryExpression> constraintExprs)
         {
-            var b = expr as BinaryExpression;
-            if (b == null)
+            if (!(expr is BinaryExpression b))
                 return;
 
             if (b.NodeType == ExpressionType.AndAlso) {
@@ -362,9 +361,11 @@ namespace EasyLayout
             throw new Exception ("Failed to get the left and right anchors from " + binary);
         }
 
+
         /// <summary>
         /// The baseline of the view whose frame is viewFrame. Use only when defining constraints.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage ("Style", "IDE0060:Remove unused parameter", Justification = "It's documented that this function doesn't work")]
         public static nfloat GetBaseline (this CoreGraphics.CGRect viewFrame)
         {
             return 0;
