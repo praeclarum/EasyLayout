@@ -50,7 +50,7 @@ class FormExample : UIViewController
 This example shows how to use `&&` to combine multiple constraints (`||` is not supported).
 
 These constraints use the `Frame` property to select which edges of the views
-should be constrained. You can also [use anchors][#Constraints_from_anchors].
+should be constrained. You can also [use anchors](#constraints-from-anchors).
 
 ### Inequalities
 
