@@ -1,10 +1,17 @@
 # EasyLayout
 
+[![EasyLayout on fuget.org](https://www.fuget.org/packages/EasyLayout/badge.svg)](https://www.fuget.org/packages/EasyLayout)
+
 [![Build Status](https://app.bitrise.io/app/bf937f36c4e5d005/status.svg?token=67ly35ZNSbT-FEk6jMQqog&branch=master)](https://app.bitrise.io/app/bf937f36c4e5d005)
 
 EasyLayout makes writing auto layout code in Xamarin.iOS easier.
 
 This library started out as a gist: [https://gist.github.com/praeclarum/6225853](https://gist.github.com/praeclarum/6225853)
+
+
+## Installation
+
+Add the nuget package `EasyLayout`.
 
 
 ## Constraints from expressions
@@ -15,7 +22,7 @@ The basic idea is to write the expression:
 textbox.Frame.Top == label.Frame.Bottom + 11
 ```
 
-to mean that we want the *top* of a `textbox` to be offset from the *bottom* of a `label`.
+to mean that we want the *top* of a `textbox` to be offset from the *bottom* of a `label` by 11 points.
 
 We can create these kinds of constraints using the `UIView` extension method
 `AddLayoutConstraints`. It takes a single argument that is a function,
@@ -53,10 +60,12 @@ This example shows how to use `&&` to combine multiple constraints (`||` is not 
 These constraints use the `Frame` property to select which edges of the views
 should be constrained. You can also [use anchors](#constraints-from-anchors).
 
+
 ### Inequalities
 
 You're not confined to `==`, you can also use `<=` and `>=` to create some, um,
 interesting UIs.
+
 
 ### Accessing the constraints
 
@@ -161,6 +170,7 @@ ContentView.ConstrainLayout (() =>
 
 );
 ```
+
 
 ## Contributing
 
