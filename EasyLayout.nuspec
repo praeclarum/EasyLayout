@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>EasyLayout</id>
+    <version>0.1</version>
+    <title>EasyLayout</title>
+    <authors>praeclarum</authors>
+    <licenseUrl>https://github.com/praeclarum/EasyLayout/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/praeclarum/EasyLayout</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>EasyLayout simplifies using UIKit's Auto Layout by allowing you to write constraints in code.</description>    
+    <tags>ios autolayout layout</tags>
+  </metadata>
+  <files>
+    <!-- Xamarin.iOS -->
+    <file src="EasyLayout/bin/Release/EasyLayout.dll" target="lib/Xamarin.iOS10/EasyLayout.dll" />
+    <file src="EasyLayout/bin/Release/EasyLayout.xml" target="lib/Xamarin.iOS10/EasyLayout.xml" />
+  </files>
+</package>

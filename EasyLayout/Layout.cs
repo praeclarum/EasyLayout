@@ -34,6 +34,9 @@ using UIKit;
 
 namespace EasyLayout
 {
+    /// <summary>
+    /// Static class with extension methods to make using Auto Layout easier.
+    /// </summary>
     public static class Layout
     {
         /// <summary>
