@@ -1,5 +1,6 @@
 # EasyLayout
 
+[![Build Status](https://app.bitrise.io/app/bf937f36c4e5d005/status.svg?token=67ly35ZNSbT-FEk6jMQqog&branch=master)](https://app.bitrise.io/app/bf937f36c4e5d005)
 
 EasyLayout makes writing auto layout code in Xamarin.iOS easier.
 
