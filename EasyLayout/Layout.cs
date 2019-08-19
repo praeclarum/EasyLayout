@@ -20,6 +20,8 @@
 // THE SOFTWARE.
 //
 
+#nullable enable
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,20 +95,13 @@ namespace EasyLayout
 
         static NSLayoutConstraint CompileConstraint (BinaryExpression expr, UIView constrainedView)
         {
-            NSLayoutRelation rel;
-            switch (expr.NodeType) {
-                case ExpressionType.Equal:
-                    rel = NSLayoutRelation.Equal;
-                    break;
-                case ExpressionType.LessThanOrEqual:
-                    rel = NSLayoutRelation.LessThanOrEqual;
-                    break;
-                case ExpressionType.GreaterThanOrEqual:
-                    rel = NSLayoutRelation.GreaterThanOrEqual;
-                    break;
-                default:
-                    throw new NotSupportedException ("Not a valid relationship for a constrain.");
-            }
+            var rel = expr.NodeType switch
+            {
+                ExpressionType.Equal => NSLayoutRelation.Equal,
+                ExpressionType.LessThanOrEqual => NSLayoutRelation.LessThanOrEqual,
+                ExpressionType.GreaterThanOrEqual => NSLayoutRelation.GreaterThanOrEqual,
+                _ => throw new NotSupportedException ("Not a valid relationship for a constrain."),
+            };
 
             if (rel == NSLayoutRelation.Equal && IsAnchor (expr.Left) && IsAnchor (expr.Right)) {
                 return GetAnchorConstraint (expr);
@@ -127,11 +122,11 @@ namespace EasyLayout
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage ("Common Practices and Code Improvements", "RECS0093:Convert 'if' to '&&' expression", Justification = "Crazy unreadable")]
-        static (NSObject View, NSLayoutAttribute Attribute, nfloat, nfloat) GetRight (Expression expr)
+        static (NSObject? View, NSLayoutAttribute Attribute, nfloat, nfloat) GetRight (Expression expr)
         {
             var r = expr;
 
-            NSObject view = null;
+            NSObject? view = null;
             var attr = NSLayoutAttribute.NoAttribute;
             nfloat mul = 1;
             nfloat add = 0;
@@ -221,7 +216,7 @@ namespace EasyLayout
         static (NSObject View, NSLayoutAttribute Attribute) GetViewAndAttribute (Expression expr)
         {
             var attr = NSLayoutAttribute.NoAttribute;
-            MemberExpression frameExpr = null;
+            MemberExpression? frameExpr = null;
 
             if (expr is MethodCallExpression fExpr) {
                 switch (fExpr.Method.Name) {
@@ -343,7 +338,7 @@ namespace EasyLayout
             return expr is MemberExpression m && m.Member.Name.EndsWith ("Anchor", StringComparison.Ordinal);
         }
 
-        static NSObject GetAnchor (Expression expr)
+        static NSObject? GetAnchor (Expression expr)
         {
             return Eval (expr) as NSObject;
         }

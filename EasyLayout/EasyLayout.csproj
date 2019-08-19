@@ -13,10 +13,11 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>EasyLayout</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Debug\EasyLayout.xml</DocumentationFile>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DocumentationFile></DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -40,7 +41,6 @@
     <IOSDebugOverWiFi></IOSDebugOverWiFi>
     <MtouchFastDev></MtouchFastDev>
     <MtouchProfiling></MtouchProfiling>
-    <MtouchSdkVersion></MtouchSdkVersion>
     <MtouchExtraArgs></MtouchExtraArgs>
     <MtouchVerbosity></MtouchVerbosity>
     <MtouchUseLlvm></MtouchUseLlvm>
@@ -55,7 +55,6 @@
     <CrashReportingApiKey></CrashReportingApiKey>
     <CrashReportingEnabled>false</CrashReportingEnabled>
     <CodesignEntitlements></CodesignEntitlements>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -64,7 +63,6 @@
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>bin\Release\EasyLayout.xml</DocumentationFile>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
