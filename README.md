@@ -121,6 +121,46 @@ class AnchorsExample : UIViewController
 
 This will make sure the label is visible no matter what toolbars or safe areas are present.
 
+## Realistic example
+
+Here's a bit of code from a custom `UITableViewCell` I created.
+When the cell is created, it creates a lot of constraints for its subviews.
+
+Note the use of baselines and centering. Also note the use of offsets
+that can be variables. The use of inequalities allows the layout engine
+some flexibility in positioning when cells get small.
+
+```csharp
+ContentView.ConstrainLayout (() =>
+
+	border.Frame.Top == ContentView.Frame.Top &&
+	border.Frame.Height == 0.5f &&
+	border.Frame.Left == ContentView.Frame.Left &&
+	border.Frame.Right == ContentView.Frame.Right &&
+
+	nameLabel.Frame.Left == ContentView.Frame.Left + hpad &&
+	nameLabel.Frame.Right == ContentView.Frame.GetMidX () - 5.5f &&
+	nameLabel.Frame.Top >= ContentView.Frame.Top + vpad &&
+	nameLabel.Frame.Bottom <= ContentView.Frame.Bottom - vpad &&
+	nameLabel.Frame.GetMidY () == ContentView.Frame.GetMidY () &&
+
+	gestureView.Frame.Left <= ContentView.Frame.GetMidX () - 22 &&
+	gestureView.Frame.Right >= scalarLabel.Frame.Right + 22 &&
+	gestureView.Frame.Width >= 88 &&
+	gestureView.Frame.Top == ContentView.Frame.Top &&
+	gestureView.Frame.Bottom == ContentView.Frame.Bottom &&
+
+	scalarLabel.Frame.Bottom == ContentView.Frame.Bottom - vpad &&
+	scalarLabel.Frame.Left == nameLabel.Frame.Right + 11 &&
+	scalarLabel.Frame.Right <= ContentView.Frame.Right - hpad &&
+	scalarLabel.Frame.GetMidY () == ContentView.Frame.GetMidY () &&
+
+	unitsLabel.Frame.Left == scalarLabel.Frame.Right + 1 &&
+	unitsLabel.Frame.GetBaseline () == scalarLabel.Frame.GetBaseline ()
+
+);
+```
+
 ## Contributing
 
 Yes, please help. This library has been forked so much. I would love to pull back in some cool features. :-)
