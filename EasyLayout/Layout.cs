@@ -341,12 +341,12 @@ namespace EasyLayout
 
         static bool IsAnchor (Expression expr)
         {
-            return expr is MemberExpression m && m.Member.Name.EndsWith("Anchor", StringComparison.Ordinal);
+            return expr is MemberExpression m && m.Member.Name.EndsWith ("Anchor", StringComparison.Ordinal);
         }
 
         static NSObject GetAnchor (Expression expr)
         {
-            return Eval(expr) as NSObject;
+            return Eval (expr) as NSObject;
         }
 
         static NSLayoutConstraint GetAnchorConstraint (BinaryExpression binary)
